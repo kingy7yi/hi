@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensus - Get notes from meeting in seconds</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        .blue-section {
+            background-color: #0874bc;
+            color: #fff;
+            padding-bottom: 50px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+        nav ul li {
+            margin-right: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+        .get-started {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 0;
+        }
+        .trusted {
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: #fff;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #fff;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .try-now {
+            background-color: #fff;
+            color: #0874bc;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .white-section {
+            background-color: #f4f4f4;
+            padding: 50px 0;
+        }
+        .white-section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .white-section .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .step-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .step-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .step-number {
+            display: inline-block;
+            background-color: #e6f3ff;
+            color: #0874bc;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .step-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .step-content {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .step-image {
+            width: 100%;
+            height: 150px;
+            background-color: #e6f3ff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .text-content {
+            text-align: center;
+            padding-top: 50vh;
+            padding-bottom: 50vh;
+        }
+        .text-content p {
+            font-size: 36px;
+            line-height: 1.3;
+            margin: 0 0 20px 0;
+            transition: opacity 0.3s ease, color 0.3s ease;
+            color: #333;
+        }
+        .text-content .blur {
+            opacity: 0.3;
+            color: #999;
+        }
+        .text-content .highlight {
+            color: #0000FF;
+        }
+        .integrations-section {
+            text-align: center;
+            padding: 50px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .integrations-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .button-and-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .icon {
+            width: 120px;
+            height: 60px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: blur(5px);
+            opacity: 0;
+            transition: all 0.5s ease-out;
+        }
+        .google-meet {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg');
+            transform: translateX(-50px);
+        }
+        .zoom {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/2560px-Zoom_Logo_2022.svg.png');
+            transform: translateX(50px);
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0874bc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #065a94;
+        }
+        .integrations-section h1 {
+            color: #000; /* Dark black color */
+        }
+    </style>
+</head>
+<body>
+    <div class="blue-section">
+        <div class="container">
+            <header>
+                <div class="logo">Sensus</div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Use Cases</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="get-started">⚡ Get started</a>
+            </header>
+            <div class="hero">
+                <div class="trusted">Sensus: Trusted by users for reliable, affordable, and user-friendly transcription services.</div>
+                <h1>Automate your meeting notes</h1>
+                <p class="subtitle">Your all-in-one tool for transcribing, summarizing, searching, and analyzing voice conversations.</p>
+                <a href="#" class="try-now">Try Sensus now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="white-section">
+        <div class="container">
+            <h2>Generate notes from a meeting in just three steps</h2>
+            <p class="subtitle">Never take notes by hand again, let technology do the writing for you.</p>
+            
+            <div class="steps-container">
+                <div class="step-box">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Set Up the Sensus App</div>
+                    <div class="step-image"></div>
+                    <div class="step-content">For Zoom, download and install the Sensus app from the Zoom App Marketplace. For Teams, integrate Sensus by adding it from the Teams App Store. For Google Meet, install the Sensus extension from the Chrome Web Store.</div>
+                </div>
+                
+                <div class="step-box">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Start Your Meeting</div>
+                    <div class="step-image"></div>
+                    <div class="step-content">Launch your preferred video conferencing platform (Zoom, Teams, or Google Meet) and start or join a meeting.</div>
+                </div>
+                
+                <div class="step-box">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Activate Sensus</div>
+                    <div class="step-image"></div>
+                    <div class="step-content">Once in the meeting, open the Sensus app or extension. It will automatically begin capturing notes and insights during your session, allowing you to focus on the discussion.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="text-content">
+            <p>You can't afford to miss a detail or lose valuable</p>
+            <p>time — that's why we built <span class="highlight">sensus</span>, your</p>
+            <p>AI-powered note-taking solution designed for</p>
+            <p>both business professionals and students.</p>
+            <p class="blur"><span class="highlight">sensus</span> helps you capture, organize, and act on</p>
+            <p class="blur">information efficiently, transforming meetings,</p>
+            <p class="blur">lectures, and study sessions into actionable</p>
+            <p class="blur">insights. With smart AI that learns from your</p>
+            <p class="blur">needs, <span class="highlight">sensus</span> enables you to stay focused, save</p>
+            <p class="blur">time, and elevate your productivity —</p>
+            <p class="blur">empowering you to make better decisions, faster.</p>
+        </div>
+    </div>
+
+    <div class="integrations-section">
+        <div class="integrations-container">
+            <h1>Seamless integrations<br>with your entire meeting platform</h1>
+            <div class="button-and-icons">
+                <div class="icon google-meet"></div>
+                <a href="#" class="button">See all integrations</a>
+                <div class="icon zoom"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const blurredParagraphs = document.querySelectorAll('.blur');
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+
+            blurredParagraphs.forEach((paragraph) => {
+                const paragraphPosition = paragraph.getBoundingClientRect().top + scrollPosition;
+                if (scrollPosition > paragraphPosition - windowHeight + 100) {
+                    paragraph.classList.remove('blur');
+                } else {
+                    paragraph.classList.add('blur');
+                }
+            });
+        });
+
+        function updateIcons() {
+            const icons = document.querySelectorAll('.icon');
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const maxScroll = document.body.scrollHeight - windowHeight;
+            const scrollPercentage = scrollPosition / maxScroll;
+
+            icons.forEach(icon => {
+                if (scrollPercentage > 0.1) {
+                    icon.style.filter = `blur(${5 - scrollPercentage * 5}px)`;
+                    icon.style.opacity = scrollPercentage;
+                    icon.style.transform = `translateX(${icon.classList.contains('google-meet') ? -50 + scrollPercentage * 50 : 50 - scrollPercentage * 50}px)`;
+                } else {
+                    icon.style.filter = 'blur(5px)';
+                    icon.style.opacity = '0';
+                    icon.style.transform = `translateX(${icon.classList.contains('google-meet') ? -50 : 50}px)`;
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateIcons);
+        window.addEventListener('load', updateIcons);
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensus Footer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .footer {
+            background-color: #284cc4;
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer-left {
+            flex: 1;
+        }
+        .footer-right {
+            flex: 2;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer h2 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .footer p {
+            margin: 0 0 20px 0;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .discord-button {
+            background-color: #5865F2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .discord-button img {
+            width: 20px;
+            margin-right: 10px;
+        }
+        .social-icons img {
+            width: 24px;
+            margin-right: 15px;
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .footer-column ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h2>SENSUS</h2>
+                <p>Sensus is a trusted platform for generating notes from meetings, videos, or lectures. It's easy to use, reliable, and accurate.</p>
+                <button class="discord-button">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z'/%3E%3C/svg%3E" alt="Discord">
+                    Join our Discord community
+                </button>
+                <div class="social-icons">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E" alt="Instagram">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="Twitter">
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-column">
+                    <h3>AI Workflows</h3>
+                    <ul>
+                        <!-- Add AI Workflows items here -->
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Sensus Tools</h3>
+                    <ul>
+                        <!-- Add Sensus Tools items here -->
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <!-- Add Product items here -->
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <!-- Add Legal items here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>Copyright © 2024 Sensus, Inc.</div>
+            <div>
+                <span>Affiliate Program</span>
+                <span>Discord</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
